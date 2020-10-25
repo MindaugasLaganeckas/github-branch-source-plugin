@@ -342,6 +342,7 @@ public class GitHubSCMSource extends AbstractGitSCMSource {
         pullRequestMetadataCache = new ConcurrentHashMap<>();
         pullRequestContributorCache = new ConcurrentHashMap<>();
         this.traits = new ArrayList<>();
+        this.traits.add(new SSHCheckoutTrait("github_ssh_key"));
     }
 
     /**

@@ -214,6 +214,7 @@ public class GitHubSCMNavigator extends SCMNavigator {
     public GitHubSCMNavigator(String repoOwner) {
         this.repoOwner = StringUtils.defaultString(repoOwner);
         this.traits = new ArrayList<>();
+        this.traits.add(new SSHCheckoutTrait("github_ssh_key"));
     }
 
     /**
