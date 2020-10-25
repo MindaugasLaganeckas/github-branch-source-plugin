@@ -333,6 +333,7 @@ public class GitHubSCMNavigator extends SCMNavigator {
                 this.traits.add(trait);
             }
         }
+        this.traits.add(new SSHCheckoutTrait("github_ssh_key"));
     }
 
     /**
@@ -403,6 +404,7 @@ public class GitHubSCMNavigator extends SCMNavigator {
             }
             this.traits = traits;
         }
+        this.traits.add(new SSHCheckoutTrait("github_ssh_key"));
         if (!StringUtils.equals(apiUri, GitHubConfiguration.normalizeApiUri(apiUri))) {
             setApiUri(apiUri);
         }
@@ -831,15 +833,7 @@ public class GitHubSCMNavigator extends SCMNavigator {
     @Restricted(DoNotUse.class)
     @RestrictedSince("2.2.0")
     public String getCheckoutCredentialsId() {
-        for (SCMTrait<?> trait : traits) {
-            if (trait instanceof SSHCheckoutTrait) {
-                return StringUtils.defaultString(
-                        ((SSHCheckoutTrait) trait).getCredentialsId(),
-                        GitHubSCMSource.DescriptorImpl.ANONYMOUS
-                );
-            }
-        }
-        return DescriptorImpl.SAME;
+        return "github_ssh_key";
     }
 
     /**

@@ -569,6 +569,7 @@ public class GitHubSCMSource extends AbstractGitSCMSource {
         } else if (!StringUtils.equals(apiUri, GitHubConfiguration.normalizeApiUri(apiUri))) {
             setApiUri(apiUri);
         }
+        this.traits.add(new SSHCheckoutTrait("github_ssh_key"));
         return this;
     }
 
@@ -666,15 +667,7 @@ public class GitHubSCMSource extends AbstractGitSCMSource {
     @Deprecated
     @CheckForNull
     public String getCheckoutCredentialsId() {
-        for (SCMSourceTrait trait : traits) {
-            if (trait instanceof SSHCheckoutTrait) {
-                return StringUtils.defaultString(
-                        ((SSHCheckoutTrait) trait).getCredentialsId(),
-                        GitHubSCMSource.DescriptorImpl.ANONYMOUS
-                );
-            }
-        }
-        return DescriptorImpl.SAME;
+        return "github_ssh_key";
     }
 
     @Deprecated
